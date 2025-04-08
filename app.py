@@ -3,12 +3,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import sqlite3
 import os
 import uuid
+import secrets
 from werkzeug.utils import secure_filename
 from datetime import datetime
 
 #initialize the application
 app = Flask(__name__)
-app.secret_key = 'secret_key'
+app.secret_key = os.getenv('FLASK_SECRET_KEY', secrets.token_hex(16))
 
 UPLOAD_FOLDER = 'upload'
 ALLOWED_MIME = 'application/pdf'
